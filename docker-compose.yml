@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    restart: always
+    image: postgres:10.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: lfybkfkf1122
+      POSTGRES_DB: my_database
+    ports:
+      - 5433:5432
+  
+  graphql:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./graphql-server
+    depends_on: 
+      - db
+    ports:
+     - 4000:4000
